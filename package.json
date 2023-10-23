@@ -1,0 +1,35 @@
+{
+  "name": "conversi-n-de-divisas",
+  "version": "1.0.0",
+  "description": "API REST que permite la conversión de divisas. Este aplicativo permite el cambio de una moneda hacia un conjunto de monedas. Además de agregar nuevas divisas y cambiar las ya existentes.",
+  "main": "index.js",
+  "scripts": {
+    "start":"tsc && nodemon dist/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/JuanDHernandezA/Conversi-n-de-Divisas.git"
+  },
+  "author": "Juan Diego Hernández Amaya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuanDHernandezA/Conversi-n-de-Divisas/issues"
+  },
+  "homepage": "https://github.com/JuanDHernandezA/Conversi-n-de-Divisas#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mysql2": "^3.6.2",
+    "nodemon": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.4",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.20",
+    "@types/mysql": "^2.15.23",
+    "@types/node": "^20.8.7",
+    "typescript": "^5.2.2"
+  }
+}
