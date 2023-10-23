@@ -9,8 +9,19 @@ divisaRouter.get('/',async (req:Request,res:Response) => {
         if (err){
             return res.status(500).json({ 'errorMessage': err.message }); 
         }
-        
+
         res.status(200).json({'data':divisas});
+    });
+});
+
+divisaRouter.post('/',async (req:Request,res:Response) => {
+    const newDivisa:Divisa = req.body;
+    divisaModel.create(newDivisa,(err:Error, divisaId:number)=>{
+        if (err){
+            return res.status(500).json({ 'errorMessage': err.message }); 
+        }
+        
+        res.status(200).json({'DivisaId':divisaId});
     });
 });
 
