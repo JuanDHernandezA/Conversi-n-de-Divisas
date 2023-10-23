@@ -1,4 +1,4 @@
-export interface divisa{
+export interface Divisa{
     id:number,
     nombre_div:string,
     iniciales_div:string,
