@@ -36,7 +36,7 @@ export const findAll = (callback:Function)=>{
                 };
                 divisas.push(divisa);
             });
-            callback(divisas);
+            callback(null,divisas);
         }
     );
 };
