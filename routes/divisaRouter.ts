@@ -5,9 +5,10 @@ import { Divisa } from '../types/divisa';
 const divisaRouter = express.Router();
 
 divisaRouter.get('/calcular',async (req:Request,res:Response) => {
+    const moneda:number = req.body.moneda
     const ids:Number[] = req.body.ids;
-    const valor:number = Number(ids.pop());
-    divisaModel.calcular(ids,valor,(err:Error, resultado:Number)=>{
+    const valor:number = req.body.valor;
+    divisaModel.calcular(moneda,ids,valor,(err:Error, resultado:Number)=>{
         if (err){
             return res.status(500).json({ 'errorMessage': err.message }); 
         }

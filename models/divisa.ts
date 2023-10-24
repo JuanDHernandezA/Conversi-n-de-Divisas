@@ -1,20 +1,50 @@
 import { Divisa } from "../types/divisa";
+import { Conversion } from "../types/conversion";
 import { db } from "../db";
 import { RowDataPacket, ResultSetHeader } from "mysql2";
 
-export const calcular = (ids : Number[], valor:number, callback:Function)=>{
-    const queryString = "select * from divisa where id in(?,?)"
+export const calcular = (moneda:number,ids : Number[], valor:number, callback:Function)=>{
+    const queryString = "select * from divisa where id in (?)"
+
+    ids.push(moneda)
 
     db.query(
         queryString,
-        ids,
+        [ids],
         (err,result)=>{
             if(err){callback(err)}
 
             const rows = <RowDataPacket[]>result;
-            const conversion = valor*(rows[0].vlr_referencia / rows[1].vlr_referencia);
+            const divisas : Divisa[] = [];
+            const converision : Conversion[] =[];
+            var referencia:number;
 
-            callback(null,conversion);
+            rows.forEach(row =>{
+                const divisa: Divisa ={
+                    id: row.id,
+                    nombre_div: row.nombre_div,
+                    iniciales_div: row.iniciales_div,
+                    vlr_referencia: row.vlr_referencia
+
+                };
+                if(divisa.id == moneda){
+                    referencia = divisa.vlr_referencia
+                }
+                divisas.push(divisa);
+            });
+
+            divisas.forEach(divisa=>{
+                if(divisa.id != moneda){
+                    const c : Conversion={
+                        moneda:divisa.nombre_div,
+                        vlr_final: valor*(referencia/divisa.vlr_referencia)
+                    }
+                    converision.push(c);
+                }
+            })
+
+            
+            callback(null,converision);
         }
     );
 }
