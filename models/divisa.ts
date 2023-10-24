@@ -63,6 +63,27 @@ export const create = (divisa : Divisa, callback: Function)=>{
     );
 };
 
+export const findOne = (divisaId:number, callback:Function)=>{
+    const queryString = "select * from divisa where id = ?";
+
+    db.query(
+        queryString,
+        divisaId,
+        (err, result)=>{
+            if(err) {callback(err)};
+
+            const row = (<RowDataPacket>result)[0];
+            const divisa : Divisa = {
+                id : row.id,
+                nombre_div : row.nombre_div,
+                iniciales_div : row.iniciales_div,
+                vlr_referencia: row.vlr_referencia
+            }
+            callback(null,divisa);
+        }
+    );
+};
+
 export const findAll = (callback:Function)=>{
     const queryString = "select * from divisa";
 

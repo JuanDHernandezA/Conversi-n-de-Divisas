@@ -27,6 +27,17 @@ divisaRouter.get('/',async (req:Request,res:Response) => {
     });
 });
 
+divisaRouter.get('/:id',async (req:Request,res:Response) => {
+    const divisaId = Number(req.params.id);
+    divisaModel.findOne(divisaId,(err:Error, divisa:Divisa)=>{
+        if (err){
+            return res.status(500).json({ 'errorMessage': err.message }); 
+        }
+
+        res.status(200).json({'data':divisa});
+    });
+});
+
 divisaRouter.post('/',async (req:Request,res:Response) => {
     const newDivisa:Divisa = req.body;
     divisaModel.create(newDivisa,(err:Error, divisaId:number)=>{
