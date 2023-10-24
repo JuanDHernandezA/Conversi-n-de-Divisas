@@ -4,6 +4,18 @@ import { Divisa } from '../types/divisa';
 
 const divisaRouter = express.Router();
 
+divisaRouter.get('/calcular',async (req:Request,res:Response) => {
+    const ids:Number[] = req.body.ids;
+    const valor:number = Number(ids.pop());
+    divisaModel.calcular(ids,valor,(err:Error, resultado:Number)=>{
+        if (err){
+            return res.status(500).json({ 'errorMessage': err.message }); 
+        }
+
+        res.status(200).json({'resultado':resultado});
+    })
+})
+
 divisaRouter.get('/',async (req:Request,res:Response) => {
     divisaModel.findAll((err:Error, divisas:Divisa[])=>{
         if (err){

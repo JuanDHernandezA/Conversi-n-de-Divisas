@@ -2,6 +2,23 @@ import { Divisa } from "../types/divisa";
 import { db } from "../db";
 import { RowDataPacket, ResultSetHeader } from "mysql2";
 
+export const calcular = (ids : Number[], valor:number, callback:Function)=>{
+    const queryString = "select * from divisa where id in(?,?)"
+
+    db.query(
+        queryString,
+        ids,
+        (err,result)=>{
+            if(err){callback(err)}
+
+            const rows = <RowDataPacket[]>result;
+            const conversion = valor*(rows[0].vlr_referencia / rows[1].vlr_referencia);
+
+            callback(null,conversion);
+        }
+    );
+}
+
 export const create = (divisa : Divisa, callback: Function)=>{
     const queryString = "insert into divisa(nombre_div, iniciales_div,vlr_referencia) values (?,?,?);"
     db.query(
