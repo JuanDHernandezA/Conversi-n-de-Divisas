@@ -18,8 +18,7 @@ API REST que permite la conversión de divisas. Este aplicativo permite el cambi
 ## Instalación y arranque del API
 **1. Puedes clonar este repositorio con el siguiente comando :-**
 ```bash
- git clone https://github.com/norbeydanilo/api_typescript_mysql.git
- cd api_typescript_mysql
+ git clone https://github.com/JuanDHernandezA/Conversi-n-de-Divisas.git
 ```
 **2. Instala los paquetes requeridos :-**
 ```bash
