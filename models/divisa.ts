@@ -41,12 +41,12 @@ export const findAll = (callback:Function)=>{
     );
 };
 
-export const borrar = (divisa: Divisa, callback:Function)=>{
+export const borrar = (divisaId: Number, callback:Function)=>{
     const queryString = "Delete from divisa where id=?";
 
     db.query(
         queryString,
-        divisa.id,
+        divisaId,
         (err,result)=>{
             if(err) {callback(err)}
 

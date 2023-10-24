@@ -25,4 +25,26 @@ divisaRouter.post('/',async (req:Request,res:Response) => {
     });
 });
 
+divisaRouter.put('/',async (req:Request,res:Response) => {
+    const divisa:Divisa = req.body;
+    divisaModel.update(divisa,(err:Error, numUpdate:number)=>{
+        if (err){
+            return res.status(500).json({ 'errorMessage': err.message }); 
+        }
+        
+        res.status(200).json({'Record(s) updated': numUpdate});
+    });
+});
+
+divisaRouter.delete('/:id',async (req:Request,res:Response) => {
+    const divisa = Number(req.params.id);
+    divisaModel.borrar(divisa,(err:Error, numDelete:number)=>{
+        if (err){
+            return res.status(500).json({ 'errorMessage': err.message }); 
+        }
+        
+        res.status(200).json({'Record(s) deleted': numDelete});
+    });
+});
+
 export {divisaRouter};
