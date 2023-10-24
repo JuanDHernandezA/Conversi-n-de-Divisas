@@ -37,6 +37,7 @@ divisaRouter.put('/',async (req:Request,res:Response) => {
 });
 
 divisaRouter.delete('/:id',async (req:Request,res:Response) => {
+    console.log("llego al router ",req.params.id);
     const divisa = Number(req.params.id);
     divisaModel.borrar(divisa,(err:Error, numDelete:number)=>{
         if (err){
